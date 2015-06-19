@@ -45,16 +45,13 @@ function collide(engine,contact)
 end
 ```
 
-You can pass additional arguments through update, draw, touched and collid for example:
+You can pass additional arguments through update, draw, touched and collide:
 
 ```lua
 function update(engine)
     engine:update(DeltaTime,WIDTH,HEIGHT)
 end
 ```
-
-
-Then your ready to start writing Components and Systems.
 
 Components Example
 -------------
