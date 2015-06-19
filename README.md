@@ -111,17 +111,20 @@ function RenderSystem:init()
             p = node(Position)
             pp,pa = p.value,p.angle
             
+			-- calculate position
             pos.x = pp.x * width 
             pos.y = pp.y * height
             
             a = pa * 360
             
+			-- translate to the position 
             translate(pos.x,pos.y)
             rotate(a)
             
-			-- get the display component
+			-- draw the display component
             node(Display).view:draw(width,height)
             
+			-- translate back to origin
             rotate(-a)
             translate(-pos.x,-pos.y)
             
