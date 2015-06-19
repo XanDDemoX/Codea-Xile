@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Unknown</string>
+	<key>Buffer Order</key>
+	<array>
+		<string>Xile</string>
+		<string>Main</string>
+		<string>MainTemplate</string>
+		<string>Include</string>
+		<string>Reflection</string>
+		<string>Query</string>
+		<string>List</string>
+		<string>Event</string>
+		<string>Component</string>
+		<string>Node</string>
+		<string>NodeCache</string>
+		<string>EngineCache</string>
+		<string>Engine</string>
+		<string>Entity</string>
+		<string>StateMachine</string>
+		<string>System</string>
+		<string>Data</string>
+		<string>TouchSystem</string>
+		<string>Assets</string>
+		<string>Asset</string>
+		<string>Image</string>
+		<string>Shader</string>
+		<string>WaveyShader</string>
+		<string>View</string>
+		<string>TileMap</string>
+		<string>TileMesh</string>
+		<string>Camera</string>
+		<string>Fps</string>
+	</array>
+	<key>Description</key>
+	<string>No description available</string>
+</dict>
+</plist>
