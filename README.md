@@ -9,7 +9,9 @@ Fork and then clone with a Git client for Codea or Create a project called "Xile
 Usage
 -------------
 
-Add a dependency to the "Xile" project and replace the default "Main" tab with:
+1. Import the Xile project into codea.
+2. Create a new project and add a dependency to the "Xile" project 
+3. Replace the default "Main" tab with:
 
 ```lua
 setup = Xile.setup(function(engine)
