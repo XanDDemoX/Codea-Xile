@@ -130,7 +130,7 @@ function RenderSystem:init()
 end
 ```
 
-Using entities, components and systems example
+Setup example
 -------------
 ```lua
 
