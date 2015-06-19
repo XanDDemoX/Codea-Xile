@@ -93,8 +93,10 @@ local Display = Xile.Data.Display
 function RenderSystem:init()
     self:base().init(self)
     
+	-- Register for Display and Position compents
     local nodes = self:nodes(Display,Position)
     
+	-- called on draw
     self.draw = function(self,width,height)
         
         pushMatrix()
@@ -102,8 +104,10 @@ function RenderSystem:init()
         local pos,a = vec2(0,0),0
         local p,pp,pa
 
+		-- draw nodes
         for node in nodes() do
             
+			-- get the position component
             p = node(Position)
             pp,pa = p.value,p.angle
             
@@ -115,6 +119,7 @@ function RenderSystem:init()
             translate(pos.x,pos.y)
             rotate(a)
             
+			-- get the display component
             node(Display).view:draw(width,height)
             
             rotate(-a)
