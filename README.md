@@ -57,6 +57,9 @@ Components Example
 -------------
 
 ```lua
+
+-- 2D Position component
+
 Position = class(Component)
 
 function Position:init(value,angle)
@@ -64,6 +67,7 @@ function Position:init(value,angle)
     self.angle = angle or 0
 end
 
+-- Health component 
 
 Health = class(Component)
 
@@ -71,6 +75,8 @@ function Health:init(value)
     self.value = value or 100
 end
 
+
+-- Display component
 
 Display = class(Component)
 
@@ -85,6 +91,9 @@ end
 System Example
 -------------
 ```lua
+
+-- 2D Render system
+
 RenderSystem = class(Xile.System)
 
 local Position = Xile.Data.Position
@@ -150,7 +159,6 @@ setup = Xile.setup(function(engine)
     local shipEntity = Entity()
 
 	
-	
 	-- add components 
 	shipEntity
 		:add(Spaceship(ship))
@@ -159,12 +167,10 @@ setup = Xile.setup(function(engine)
 		:add(Health(150))
 		
 		
-		
 	-- add systems
 	engine
 		:add(RenderSystem())
 		:add(MotionSystem())
-	
 	
 	
 	-- add entities
