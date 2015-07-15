@@ -1,5 +1,10 @@
-local TileMap,xi = Xile.class(Xile.Element)
-xi.TileMap = TileMap
+local TileMap = Xile.class()
+Xile.TileMap = TileMap
+
+local event = Xile.event
+local from = Xile.from
+
+TileMap.calcIndex = function(x,y,sz) return 1+(sz.x * y) + x end
 
 function TileMap:init(args)
     self:base().init(self)
@@ -10,10 +15,10 @@ function TileMap:init(args)
     local tile = args.tile or {}
     local tiles,count
     
-    local calcIndex = function(x,y) return 1+(state.size.x * y) + x end
+    local calcIndex = function(x,y) return TileMap.calcIndex(x,y,state.size) end
     
     local raiseTouch
-    self.ontouch,raiseTouch = xi.Event()
+    self.ontouch,raiseTouch = event()
     
     self.tiles = function(self)
         return tiles
@@ -36,11 +41,10 @@ function TileMap:init(args)
         
         if state == nil then return self end
 
-        tiles = xi(state.tiles):map(function(i) return i:load(tile.size) end):array()
+        tiles = {}
+        tiles[0] = state.tiles[0] or state.empty or {visible=false,load =function() end, draw=function() end}
         
-        tiles[0] = state.empty or {visible=false,load = function() end, draw=function() end}
-        
-        tiles[0]:load(tile.size)
+        tiles = from(state.tiles)(tiles):each(function(i) i:load(tile.size) end):array()
         
         count = #tiles+1
         
@@ -57,17 +61,19 @@ function TileMap:init(args)
         return vec2(tile.size.x * state.size.x,tile.size.y * state.size.y)
     end
     
-    self.screen = function(self,mapX,mapY)
-        local sz = tile.size
-        return vec2(mapX*sz.x,mapY*sz.y)
-    end
-    
-    self.map = function(self,sx,sy)
-        return vec2(math.floor(sx / tile.size.x), math.floor(sy / tile.size.y))
+    self.map = function(self,x,y)
+        local sz = self:size()
+        local tz = tile.size
+        return vec2(math.floor((x * sz.x) / tz.x), math.floor((y * sz.y) / tz.y))
     end
     
     self.get = function (self,mapX,mapY)
         return state.map[calcIndex(mapX,mapY)]
+    end
+    
+    self.set = function(self,mapX,mapY,value)
+        state.map[calcIndex(mapX,mapY)] = value
+        return self
     end
     
     self.draw = function(self)
@@ -77,7 +83,7 @@ function TileMap:init(args)
         pushMatrix()
         
         local t
-        local pos
+        local pos = vec2(0,0)
         local sz = state.size
         local tz = tile.size
         
@@ -85,13 +91,12 @@ function TileMap:init(args)
  
             for x=0, sz.x-1 do
                 
-                t=tiles[self:get(x,y)]
+                t = state.map[calcIndex(x,y)]
+                t = tiles[t]
                 
-                if t~= nil and t.visible == true then
-                    pos = self:screen(x,y)
-                    
+                if t~= nil then
+                    pos.x, pos.y = x * tz.x, y * tz.y
                     t:draw()
-                
                 end
                 translate(tz.x,0)
             end
@@ -101,19 +106,26 @@ function TileMap:init(args)
         popMatrix()
     end
     
-    self.hittest = function(self,x,y)
-       local sz = self:size()
-       return x > 0 and y > 0 and x <= sz.x and y <= sz.y
+    self.hitTest = function(self,x,y)
+        local sz = self:size()
+        x = x / (sz.x / WIDTH)
+        y = y / (sz.y / HEIGHT)
+        if x >= 0 and y >= 0 and x <= 1 and y <= 1 then
+            return x,y
+        end
     end
-    
     
     self.touched = function(self,touch)
         
         local t = touch
         -- bounds test
-        if self:hittest(t.x, t.y) then
-            raiseTouch(self,{pos=self:map(t.x,t.y),
-                             prev=self:map(t.prevX,t.prevY),
+        
+        local x,y = self:hitTest(t.x,t.y)
+        local px,py = self:hitTest(t.prevX,t.prevY)
+        
+        if x and y then
+            raiseTouch(self,{pos=vec2(x,y),
+                             prev=px and py and vec2(px,py),
                              touch=t})
         end
     end

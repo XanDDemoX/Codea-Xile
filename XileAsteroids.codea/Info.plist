@@ -19,6 +19,7 @@
 		<string>Spaceship</string>
 		<string>Asteroid</string>
 		<string>Bullet</string>
+		<string>ControllerView</string>
 		<string>EntityImageView</string>
 		<string>BulletView</string>
 		<string>AsteroidView</string>

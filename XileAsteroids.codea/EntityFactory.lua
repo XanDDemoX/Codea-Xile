@@ -75,6 +75,22 @@ function EntityFactory:init(assets,keys)
         return e
     end
     
+    self.createController = function()
+        
+        local e = Entity()
+        
+        local view = ControllerView()
+        :add(0,0,2,1)
+        :add(0,1,1,1)
+        :add(1,1,1,1)
+        :add(0,2,2,1)
+        
+        e:add(Position(vec2(0,0)))
+        :add(Display(view))
+        
+        return e
+    end
+    
     
 end
 

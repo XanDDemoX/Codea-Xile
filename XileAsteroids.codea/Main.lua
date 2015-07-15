@@ -21,6 +21,7 @@ setup = Xile.setup(function(engine)
     
     local ship = factory:createSpaceship()
     
+    local controller = factory:createController()
     
     engine:add(RenderSystem())
     :add(MotionSystem())
@@ -31,6 +32,7 @@ setup = Xile.setup(function(engine)
     :add(AgeSystem(function(entity) engine:remove(entity) end))
     :add(CollisionSystem(vec2(-0.009,-0.009),vec2(0.009,0.009)))
     :add(ship)
+    :add(controller)
     
     local a
     
