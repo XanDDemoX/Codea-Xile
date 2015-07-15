@@ -20,7 +20,7 @@ Usage
 -------------
 
 1. Import the Xile Framework project into Codea.
-2. Create a new project and add a dependency to your Xile Framework project in Codea 
+2. Create a new project and add a dependency to your Xile Framework project
 3. Replace the default "Main" tab with:
 
 ```lua
