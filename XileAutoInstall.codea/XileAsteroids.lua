@@ -10,7 +10,6 @@ setup = Xile.setup(function(engine)
     local Image = x.Image
     
     local assets = Assets("Space Art")
-    readImage("Space Art:Asteroid Small")
     
     assets:asset(Image,CENTER)
     :add("ship","Red Ship")
@@ -23,18 +22,16 @@ setup = Xile.setup(function(engine)
     
     local ship = factory:createSpaceship()
     
-    local controller = factory:createController()
-    
     engine:add(RenderSystem())
     :add(MotionSystem())
     :add(ControlSystem(function()
         local b = factory:createBullet(ship,WIDTH,HEIGHT)
         engine:add(b) 
-    end))
+    end,ship(Motion)))
     :add(AgeSystem(function(entity) engine:remove(entity) end))
+    :add(HealthSystem(function(entity) engine:remove(entity) end))
     :add(CollisionSystem(vec2(-0.009,-0.009),vec2(0.009,0.009)))
     :add(ship)
-    :add(controller)
     
     local a
     
@@ -130,6 +127,7 @@ function EntityFactory:init(assets,keys)
         
         e:add(ship)
         :add(Position(vec2(0.5,0.5),0.5))
+        :add(Motion())
         
         s:set("alive")
         
@@ -150,7 +148,7 @@ function EntityFactory:init(assets,keys)
         :add(Motion(rand_vec(-0.009,0.009),rand_real(-0.019,0.019)))
         :add(Collision(vec2(sz.x/width,sz.y/height)))
         :add(Display(AsteroidView(e,img)))
-        :add(Health(100))
+        :add(Health(1))
         
         return e
     end
@@ -195,6 +193,36 @@ function EntityFactory:init(assets,keys)
 end
 
 
+--# HealthSystem
+HealthSystem = class(Xile.System)
+
+local Health = Xile.Data.Health
+
+function HealthSystem:init(removeEntity)
+    self:base().init(self)
+    
+    removeEntity = removeEntity or function() end
+    
+    local nodes = self:nodes(Asteroid,Health)
+    
+    self.update = function(self,time)
+        
+        local a
+        
+        for node in nodes() do
+
+            h = node(Health)
+            
+            if h.value <= 0 then
+                removeEntity(node(Asteroid).entity)
+            end
+            
+        end
+        
+    end
+    
+end
+
 --# AgeSystem
 AgeSystem = class(Xile.System)
 
@@ -228,15 +256,20 @@ end
 --# ControlSystem
 ControlSystem = class(Xile.TouchSystem)
 
-function ControlSystem:init(createBullet)
-    self:base().init(self)
+function ControlSystem:init(createBullet,motion)
+    self:base().init(self,1)
     
+    local m = motion
     
     self.update = function(self,time)
         
         local t = self:item(1)
         
         if t == nil then return end
+        
+        if t[MOVING] then
+            m.velocity = vec2(t[MOVING].deltaX/WIDTH,t[MOVING].deltaY/HEIGHT) * 10
+        end
         
         if t[ENDED] then
             createBullet()
@@ -547,6 +580,14 @@ function CollisionSystem:init(minAsteroidVelocity,maxAsteroidVelocity)
 end
 
 
+--# Motion
+Motion = class()
+
+function Motion:init(velocity,spin)
+    self.velocity = velocity or vec2()
+    self.spin = spin or 0
+end
+
 --# Collision
 Collision = class()
 
@@ -556,14 +597,6 @@ function Collision:init(size)
     else
         self.size = size
     end
-end
-
---# Motion
-Motion = class()
-
-function Motion:init(velocity,spin)
-    self.velocity = velocity or vec2()
-    self.spin = spin or 0
 end
 
 --# Age
@@ -624,16 +657,6 @@ function ControllerView:init(args)
         for i,v in ipairs(buttons) do
             button(v.x,v.y,v.w,v.h)
         end
-        
-        --[[
-        button(0,0,2,1)
-        
-        button(0,1,1,1)
-        
-        button(1,1,1,1)
-        
-        button(0,2,2,1)
-          ]]--
         
     end
     

@@ -8,9 +8,11 @@ Copy the contents of a project from one of the links below and then in Codea pre
 
 * [Xile Framework](https://raw.githubusercontent.com/XanDDemoX/Codea-Xile/master/XileAutoInstall.codea/Xile.lua)
 
-* [Xile Asteriods (Example Game)](https://github.com/XanDDemoX/Codea-Xile/blob/master/XileAutoInstall.codea/XileAsteroids.lua)
+* Example Projects - Don't forget to set a dependency to the Xile Framework project!
 
-* [Xile Editor (Experimental)](https://github.com/XanDDemoX/Codea-Xile/blob/master/XileAutoInstall.codea/XileEditor.lua)
+* [Asteriods Example Game](https://github.com/XanDDemoX/Codea-Xile/blob/master/XileAutoInstall.codea/XileAsteroids.lua)
+
+* [Tilemap Editor](https://github.com/XanDDemoX/Codea-Xile/blob/master/XileAutoInstall.codea/XileEditor.lua)
 
 Usage
 -------------
