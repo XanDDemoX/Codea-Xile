@@ -30,6 +30,7 @@ function EntityFactory:init(assets,keys)
         
         e:add(ship)
         :add(Position(vec2(0.5,0.5),0.5))
+        :add(Motion())
         
         s:set("alive")
         
@@ -50,7 +51,7 @@ function EntityFactory:init(assets,keys)
         :add(Motion(rand_vec(-0.009,0.009),rand_real(-0.019,0.019)))
         :add(Collision(vec2(sz.x/width,sz.y/height)))
         :add(Display(AsteroidView(e,img)))
-        :add(Health(100))
+        :add(Health(1))
         
         return e
     end

@@ -1,10 +1,16 @@
 # Codea-Xile
-A lightweight entity component system based game engine in Lua 5.3 for the Ipad app Codea
+A lightweight entity component system framework in Lua 5.3 for the Ipad app Codea.
 
 Installation
 -------------
 
-Fork and then clone with a Git client for Codea or Create a project called "Xile" in Codea and import the project using a 3rd party pc to ipad transfer tool.
+Copy the contents of a project from one of the links below and then in Codea press and hold the "Add New Project" button then press the "Paste Into Project" button.
+
+* [Xile Framework](https://raw.githubusercontent.com/XanDDemoX/Codea-Xile/master/XileAutoInstall.codea/Xile.lua)
+
+* [Xile Asteriods (Example Game)](https://github.com/XanDDemoX/Codea-Xile/blob/master/XileAutoInstall.codea/XileAsteroids.lua)
+
+* [Xile Editor (Experimental)](https://github.com/XanDDemoX/Codea-Xile/blob/master/XileAutoInstall.codea/XileEditor.lua)
 
 Usage
 -------------

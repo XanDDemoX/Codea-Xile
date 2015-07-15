@@ -8,7 +8,6 @@ setup = Xile.setup(function(engine)
     local Image = x.Image
     
     local assets = Assets("Space Art")
-    readImage("Space Art:Asteroid Small")
     
     assets:asset(Image,CENTER)
     :add("ship","Red Ship")
@@ -21,18 +20,16 @@ setup = Xile.setup(function(engine)
     
     local ship = factory:createSpaceship()
     
-    local controller = factory:createController()
-    
     engine:add(RenderSystem())
     :add(MotionSystem())
     :add(ControlSystem(function()
         local b = factory:createBullet(ship,WIDTH,HEIGHT)
         engine:add(b) 
-    end))
+    end,ship(Motion)))
     :add(AgeSystem(function(entity) engine:remove(entity) end))
+    :add(HealthSystem(function(entity) engine:remove(entity) end))
     :add(CollisionSystem(vec2(-0.009,-0.009),vec2(0.009,0.009)))
     :add(ship)
-    :add(controller)
     
     local a
     

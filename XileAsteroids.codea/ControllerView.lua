@@ -22,16 +22,6 @@ function ControllerView:init(args)
             button(v.x,v.y,v.w,v.h)
         end
         
-        --[[
-        button(0,0,2,1)
-        
-        button(0,1,1,1)
-        
-        button(1,1,1,1)
-        
-        button(0,2,2,1)
-          ]]--
-        
     end
     
 end

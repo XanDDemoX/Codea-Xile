@@ -8,13 +8,14 @@
 	<array>
 		<string>Main</string>
 		<string>EntityFactory</string>
+		<string>HealthSystem</string>
 		<string>AgeSystem</string>
 		<string>ControlSystem</string>
 		<string>MotionSystem</string>
 		<string>RenderSystem</string>
 		<string>CollisionSystem</string>
-		<string>Collision</string>
 		<string>Motion</string>
+		<string>Collision</string>
 		<string>Age</string>
 		<string>Spaceship</string>
 		<string>Asteroid</string>

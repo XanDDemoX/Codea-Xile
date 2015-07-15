@@ -70,7 +70,7 @@ function TouchSystem:init(maxMoving)
                 if max == 1 then
                     t[MOVING] = touch
                 else
-                    t[MOVING][math.fmod(#t[MOVING],max)] = touch
+                    t[MOVING][math.fmod(#t[MOVING]+1,max+1)] = touch
                 end
             elseif touch.state == ENDED then
                 
