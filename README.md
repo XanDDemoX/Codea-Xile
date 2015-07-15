@@ -19,8 +19,8 @@ Don't forget to set a dependency to the Xile Framework project!
 Usage
 -------------
 
-1. Import the Xile project into codea.
-2. Create a new project and add a dependency to the "Xile" project 
+1. Import the Xile Framework project into Codea.
+2. Create a new project and add a dependency to your Xile Framework project in Codea 
 3. Replace the default "Main" tab with:
 
 ```lua
