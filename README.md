@@ -65,6 +65,7 @@ end
 
 Components Example
 -------------
+Components can be any Codea class, inheriting the Component base class is optional.
 
 ```lua
 
@@ -100,6 +101,8 @@ end
 
 System Example
 -------------
+Systems must inherit the Xile.System base class and register for nodes using self:nodes(componentType1,componentType2,...) on initialse.
+
 ```lua
 
 -- 2D Render system
