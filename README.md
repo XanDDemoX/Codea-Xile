@@ -3,7 +3,7 @@ A lightweight entity component system framework in Lua 5.3 for the Ipad app Code
 
 Inspired by: [The Ash Framework By Richard Lord](http://www.ashframework.org)
 
-Please note this not a direct port of the Ash Framework and it has not been tested in "production" circumstances. 
+Please note this not a direct port of the Ash Framework and it has not been tested "in production". 
 
 Installation
 -------------
